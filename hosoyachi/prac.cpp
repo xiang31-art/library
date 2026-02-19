@@ -34,8 +34,14 @@ public:
   }
 
   // 本の貸出
-  void borrow_book()
+  void borrow_book(int input_num)
   {
+    if (books.at(input_num).avail == 0)
+    {
+      cout << "その本の在庫はありません" << endl;
+      return;
+    }
+    books.at(input_num).avail--;
   }
 };
 
@@ -83,6 +89,16 @@ int main()
 
     case 3:
     {
+      int input_num;
+      vector<Book> books = BM.books_view();
+      for (int i = 0; i < books.size(); i++)
+      {
+        cout << i << " タイトル:" << books.at(i).title << " 在庫数:" << books.at(i).avail << endl;
+      }
+      cout << "借りたい本の番号を入力:";
+      cin >> input_num;
+      BM.borrow_book(input_num);
+      break;
     }
 
     case 4:
