@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05: DOM操作の基礎 - JavaScript学習</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2c3e50; }
+        h2 { color: #3498db; }
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .exercise {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover { background: #2980b9; }
+        .highlight {
+            background: #e8f5e9;
+            padding: 10px;
+            border-left: 4px solid #4caf50;
+            margin: 10px 0;
+        }
+        .demo-box {
+            border: 2px solid #3498db;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #ecf0f1;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>📚 Lesson 05: DOM操作の基礎</h1>
+
+    <div class="section">
+        <h2>🌐 DOMとは？</h2>
+        <p><strong>DOM (Document Object Model)</strong> は、HTMLドキュメントをJavaScriptから操作するためのAPIです。</p>
+        
+        <div class="highlight">
+            <strong>💡 C言語との違い：</strong><br>
+            C言語ではコンソール出力（printf）が主でしたが、JavaScriptではWebページの要素を動的に変更できます。
+        </div>
+
+        <pre>// HTMLの構造
+&lt;div id="myDiv"&gt;
+    &lt;p class="text"&gt;Hello&lt;/p&gt;
+&lt;/div&gt;
+
+// JavaScriptから操作
+document.getElementById("myDiv");  // 要素を取得
+element.textContent = "New Text";  // 内容を変更</pre>
+    </div>
+
+    <div class="section">
+        <h2>🔍 要素の取得</h2>
+        
+        <h3>IDで取得</h3>
+        <pre>// 1つの要素を取得
+const element = document.getElementById("myId");</pre>
+
+        <h3>クラス名で取得</h3>
+        <pre>// 複数の要素を取得（HTMLCollection）
+const elements = document.getElementsByClassName("myClass");
+
+// 配列のようにアクセス
+console.log(elements[0]);</pre>
+
+        <h3>タグ名で取得</h3>
+        <pre>const paragraphs = document.getElementsByTagName("p");</pre>
+
+        <h3>CSSセレクタで取得（推奨）</h3>
+        <pre>// 最初の1つを取得
+const element = document.querySelector(".myClass");
+const element2 = document.querySelector("#myId");
+
+// すべて取得（NodeList）
+const elements = document.querySelectorAll(".myClass");</pre>
+    </div>
+
+    <div class="section">
+        <h2>✏️ 要素の内容を変更</h2>
+        
+        <h3>テキストの変更</h3>
+        <pre>const element = document.getElementById("demo");
+
+// テキストのみ（HTMLタグは無効化）
+element.textContent = "新しいテキスト";
+
+// HTMLとして解釈
+element.innerHTML = "&lt;strong&gt;太字&lt;/strong&gt;";</pre>
+
+        <div class="demo-box">
+            <p id="demo1">ここのテキストが変わります</p>
+            <button onclick="changeText()">テキストを変更</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🎨 スタイルの変更</h2>
+        
+        <pre>const element = document.getElementById("demo");
+
+// 個別のスタイルを変更
+element.style.color = "red";
+element.style.fontSize = "20px";
+element.style.backgroundColor = "yellow";
+
+// クラスの追加・削除
+element.classList.add("highlight");
+element.classList.remove("highlight");
+element.classList.toggle("highlight");  // あれば削除、なければ追加</pre>
+
+        <div class="demo-box">
+            <p id="demo2">このテキストのスタイルが変わります</p>
+            <button onclick="changeStyle()">スタイルを変更</button>
+            <button onclick="resetStyle()">リセット</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>➕ 要素の作成と追加</h2>
+        
+        <pre>// 新しい要素を作成
+const newDiv = document.createElement("div");
+newDiv.textContent = "新しい要素";
+newDiv.className = "my-class";
+
+// 既存の要素に追加
+const parent = document.getElementById("container");
+parent.appendChild(newDiv);      // 末尾に追加
+parent.prepend(newDiv);          // 先頭に追加
+parent.insertBefore(newDiv, referenceNode); // 特定の位置に追加
+
+// 要素の削除
+parent.removeChild(newDiv);
+// または
+newDiv.remove();</pre>
+
+        <div class="demo-box">
+            <div id="container">
+                <p>既存の要素</p>
+            </div>
+            <button onclick="addElement()">要素を追加</button>
+            <button onclick="removeLastElement()">最後の要素を削除</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 属性の操作</h2>
+        
+        <pre>const img = document.querySelector("img");
+
+// 属性の取得
+const src = img.getAttribute("src");
+
+// 属性の設定
+img.setAttribute("src", "new-image.jpg");
+img.setAttribute("alt", "新しい画像");
+
+// 属性の削除
+img.removeAttribute("alt");
+
+// 直接アクセス（よく使う属性）
+img.src = "image.jpg";
+img.alt = "画像";
+img.id = "myImage";</pre>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 課題1: テキストとスタイルの変更</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>下のボックス内のテキストを「こんにちは、JavaScript！」に変更</li>
+            <li>テキストの色を青色に変更</li>
+            <li>フォントサイズを24pxに変更</li>
+            <li>背景色を薄い黄色（#ffffcc）に変更</li>
+        </ol>
+        <div class="demo-box">
+            <p id="exercise1-text">変更前のテキスト</p>
+        </div>
+        <button onclick="runExercise1()">課題1を実行</button>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 課題2: リストの作成</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>果物の配列を作成（りんご、バナナ、オレンジ、ぶどう、いちご）</li>
+            <li>ul要素を作成</li>
+            <li>配列の各要素に対してli要素を作成し、ul要素に追加</li>
+            <li>完成したリストを下のボックスに表示</li>
+        </ol>
+        <div class="demo-box" id="exercise2-container"></div>
+        <button onclick="runExercise2()">課題2を実行</button>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 課題3: カウンター</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>カウンターの値を表示する要素を作成（初期値: 0）</li>
+            <li>「増やす」ボタンをクリックするとカウンターが1増える</li>
+            <li>「減らす」ボタンをクリックするとカウンターが1減る</li>
+            <li>「リセット」ボタンをクリックするとカウンターが0に戻る</li>
+            <li>カウンターが0未満にならないようにする</li>
+        </ol>
+        <div class="demo-box">
+            <p>カウント: <span id="counter">0</span></p>
+            <button onclick="increment()">増やす</button>
+            <button onclick="decrement()">減らす</button>
+            <button onclick="resetCounter()">リセット</button>
+        </div>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 課題4: 表示/非表示の切り替え</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>ボックス内にテキストを表示</li>
+            <li>「表示/非表示」ボタンをクリックするたびに、テキストの表示/非表示を切り替える</li>
+            <li>ヒント: <code>classList.toggle()</code>と<code>.hidden { display: none; }</code>を使う</li>
+        </ol>
+        <div class="demo-box">
+            <p id="toggle-text">このテキストが表示/非表示されます</p>
+            <button onclick="toggleVisibility()">表示/非表示</button>
+        </div>
+    </div>
+
+    <script>
+        // デモ用の関数
+        function changeText() {
+            document.getElementById("demo1").textContent = "テキストが変更されました！";
+        }
+
+        function changeStyle() {
+            const element = document.getElementById("demo2");
+            element.style.color = "red";
+            element.style.fontSize = "24px";
+            element.style.fontWeight = "bold";
+        }
+
+        function resetStyle() {
+            const element = document.getElementById("demo2");
+            element.style.color = "";
+            element.style.fontSize = "";
+            element.style.fontWeight = "";
+        }
+
+        function addElement() {
+            const container = document.getElementById("container");
+            const newP = document.createElement("p");
+            newP.textContent = "追加された要素 " + (container.children.length);
+            container.appendChild(newP);
+        }
+
+        function removeLastElement() {
+            const container = document.getElementById("container");
+            if (container.children.length > 1) {
+                container.removeChild(container.lastElementChild);
+            }
+        }
+
+        // ↓↓↓ ここから課題のコードを書く ↓↓↓
+
+        function runExercise1() {
+            // 課題1のコードをここに書く
+            
+        }
+
+        function runExercise2() {
+            // 課題2のコードをここに書く
+            
+        }
+
+        // 課題3用の変数とコード
+        let count = 0;
+
+        function increment() {
+            // 課題3のコードをここに書く
+            
+        }
+
+        function decrement() {
+            // 課題3のコードをここに書く
+            
+        }
+
+        function resetCounter() {
+            // 課題3のコードをここに書く
+            
+        }
+
+        function toggleVisibility() {
+            // 課題4のコードをここに書く
+            
+        }
+
+        // ↑↑↑ ここまで ↑↑↑
+    </script>
+
+    <div class="section">
+        <h2>📌 まとめ</h2>
+        <ul>
+            <li>DOMを使ってHTMLを動的に操作できる</li>
+            <li><code>querySelector</code>で要素を取得（CSSセレクタが使える）</li>
+            <li><code>textContent</code>でテキストを変更、<code>innerHTML</code>でHTMLを変更</li>
+            <li><code>style</code>プロパティで直接スタイルを変更</li>
+            <li><code>classList</code>でクラスの追加・削除・切り替え</li>
+            <li><code>createElement</code>と<code>appendChild</code>で要素を動的に追加</li>
+        </ul>
+        <p><strong>次のレッスン：</strong> 06-events.html（イベント処理）</p>
+    </div>
+</body>
+</html>

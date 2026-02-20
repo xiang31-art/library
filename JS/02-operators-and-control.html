@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02: 演算子と制御構文 - JavaScript学習</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2c3e50; }
+        h2 { color: #3498db; }
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        .c-lang { border-left: 4px solid #555; padding-left: 15px; }
+        .js-lang { border-left: 4px solid #f7df1e; padding-left: 15px; }
+        .exercise {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background: #2980b9; }
+        .warning {
+            background: #ffe6e6;
+            padding: 10px;
+            border-left: 4px solid #ff4444;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>📚 Lesson 02: 演算子と制御構文</h1>
+
+    <div class="section">
+        <h2>➕ 算術演算子</h2>
+        <p>C言語とほぼ同じですが、いくつか注意点があります。</p>
+        
+        <pre>let a = 10, b = 3;
+
+console.log(a + b);  // 13 (加算)
+console.log(a - b);  // 7  (減算)
+console.log(a * b);  // 30 (乗算)
+console.log(a / b);  // 3.3333... (除算 - C言語と違い小数になる！)
+console.log(a % b);  // 1  (剰余)
+console.log(a ** b); // 1000 (べき乗 - C言語にはない)</pre>
+
+        <div class="warning">
+            <strong>⚠️ C言語との重要な違い：</strong><br>
+            JavaScriptの除算は常に小数を返します。C言語の整数除算（10 / 3 = 3）とは異なります。
+        </div>
+
+        <h3>インクリメント・デクリメント</h3>
+        <pre>let x = 5;
+x++;  // 6 (後置)
+++x;  // 7 (前置)
+x--;  // 6
+--x;  // 5</pre>
+    </div>
+
+    <div class="section">
+        <h2>🔍 比較演算子</h2>
+        
+        <div class="comparison">
+            <div class="c-lang">
+                <h3>C言語</h3>
+                <pre>// 1種類の等価演算子
+if (a == b) { }
+if (a != b) { }</pre>
+            </div>
+            
+            <div class="js-lang">
+                <h3>JavaScript</h3>
+                <pre>// 2種類の等価演算子
+if (a == b) { }  // 型変換あり
+if (a === b) { } // 型変換なし（推奨）</pre>
+            </div>
+        </div>
+
+        <h3>== vs === の違い</h3>
+        <pre>// == は型変換してから比較
+console.log(5 == "5");   // true（文字列が数値に変換される）
+console.log(0 == false); // true
+
+// === は型も含めて厳密に比較（推奨）
+console.log(5 === "5");   // false
+console.log(0 === false); // false
+
+// 不等号も同様
+console.log(5 != "5");   // false
+console.log(5 !== "5");  // true</pre>
+
+        <p><strong>💡 ベストプラクティス：</strong>常に<code>===</code>と<code>!==</code>を使いましょう。</p>
+
+        <h3>その他の比較演算子</h3>
+        <pre>console.log(5 > 3);   // true
+console.log(5 < 3);   // false
+console.log(5 >= 5);  // true
+console.log(5 <= 3);  // false</pre>
+    </div>
+
+    <div class="section">
+        <h2>🔗 論理演算子</h2>
+        <p>C言語と同じですが、短絡評価の特性を活用できます。</p>
+        
+        <pre>// AND, OR, NOT
+console.log(true && false);  // false
+console.log(true || false);  // true
+console.log(!true);          // false
+
+// 短絡評価
+let result = null || "default";  // "default"
+let value = 10 && 20;            // 20</pre>
+    </div>
+
+    <div class="section">
+        <h2>🔀 if文</h2>
+        <p>C言語とほぼ同じ構文です。</p>
+        
+        <pre>let score = 85;
+
+if (score >= 90) {
+    console.log("優秀");
+} else if (score >= 70) {
+    console.log("良好");
+} else if (score >= 60) {
+    console.log("合格");
+} else {
+    console.log("不合格");
+}</pre>
+
+        <h3>三項演算子</h3>
+        <pre>let age = 20;
+let status = age >= 18 ? "成人" : "未成年";
+console.log(status); // "成人"</pre>
+    </div>
+
+    <div class="section">
+        <h2>🔄 switch文</h2>
+        <p>C言語と同じですが、文字列も使えます。</p>
+        
+        <pre>let fruit = "apple";
+
+switch (fruit) {
+    case "apple":
+        console.log("りんご");
+        break;
+    case "banana":
+        console.log("バナナ");
+        break;
+    case "orange":
+        console.log("オレンジ");
+        break;
+    default:
+        console.log("不明な果物");
+}</pre>
+
+        <div class="warning">
+            <strong>⚠️ 注意：</strong><code>break</code>を忘れるとフォールスルーします（C言語と同じ）。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔁 ループ</h2>
+        
+        <h3>for文</h3>
+        <pre>// C言語と同じ
+for (let i = 0; i < 5; i++) {
+    console.log(i); // 0, 1, 2, 3, 4
+}</pre>
+
+        <h3>while文</h3>
+        <pre>let count = 0;
+while (count < 3) {
+    console.log(count);
+    count++;
+}</pre>
+
+        <h3>do-while文</h3>
+        <pre>let num = 0;
+do {
+    console.log(num);
+    num++;
+} while (num < 3);</pre>
+
+        <h3>break と continue</h3>
+        <pre>// C言語と同じ
+for (let i = 0; i < 10; i++) {
+    if (i === 5) break;      // ループを抜ける
+    if (i % 2 === 0) continue; // 次の反復へ
+    console.log(i); // 1, 3
+}</pre>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 課題1: FizzBuzz</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>1から30までの数字をループで処理</li>
+            <li>3の倍数なら「Fizz」</li>
+            <li>5の倍数なら「Buzz」</li>
+            <li>15の倍数なら「FizzBuzz」</li>
+            <li>それ以外は数字そのものを出力</li>
+        </ol>
+        <button onclick="runExercise1()">課題1を実行</button>
+        <pre id="output1" style="margin-top: 10px; min-height: 100px;"></pre>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 課題2: 成績判定プログラム</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>点数を格納する変数を作成（0〜100の任意の値）</li>
+            <li>以下の基準で判定：
+                <ul>
+                    <li>90点以上: S</li>
+                    <li>80点以上: A</li>
+                    <li>70点以上: B</li>
+                    <li>60点以上: C</li>
+                    <li>60点未満: D</li>
+                </ul>
+            </li>
+            <li>「点数: ○○点, 評価: ○」という形式で出力</li>
+            <li>if-else文とswitch文の両方で実装してみる</li>
+        </ol>
+        <button onclick="runExercise2()">課題2を実行</button>
+        <pre id="output2" style="margin-top: 10px; min-height: 100px;"></pre>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 課題3: 九九の表</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>二重ループを使って九九の表を作成</li>
+            <li>「1 x 1 = 1」のような形式で出力</li>
+            <li>各段の間に空行を入れる</li>
+        </ol>
+        <button onclick="runExercise3()">課題3を実行</button>
+        <pre id="output3" style="margin-top: 10px; min-height: 200px;"></pre>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 課題4: 素数判定</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>2から50までの数字をループで処理</li>
+            <li>各数字が素数かどうかを判定</li>
+            <li>素数なら「○○は素数です」と出力</li>
+            <li>ヒント: 2からその数の平方根までの数で割り切れるかチェック</li>
+        </ol>
+        <button onclick="runExercise4()">課題4を実行</button>
+        <pre id="output4" style="margin-top: 10px; min-height: 150px;"></pre>
+    </div>
+
+    <script>
+        // ここに課題のコードを書いてください
+
+        function runExercise1() {
+            const output = document.getElementById('output1');
+            output.textContent = '';
+            
+            // ↓↓↓ ここから課題1のコードを書く ↓↓↓
+            
+            
+            
+            // ↑↑↑ ここまで ↑↑↑
+        }
+
+        function runExercise2() {
+            const output = document.getElementById('output2');
+            output.textContent = '';
+            
+            // ↓↓↓ ここから課題2のコードを書く ↓↓↓
+            
+            
+            
+            // ↑↑↑ ここまで ↑↑↑
+        }
+
+        function runExercise3() {
+            const output = document.getElementById('output3');
+            output.textContent = '';
+            
+            // ↓↓↓ ここから課題3のコードを書く ↓↓↓
+            
+            
+            
+            // ↑↑↑ ここまで ↑↑↑
+        }
+
+        function runExercise4() {
+            const output = document.getElementById('output4');
+            output.textContent = '';
+            
+            // ↓↓↓ ここから課題4のコードを書く ↓↓↓
+            
+            
+            
+            // ↑↑↑ ここまで ↑↑↑
+        }
+
+        // 出力用のヘルパー関数
+        function print(outputId, message) {
+            const output = document.getElementById(outputId);
+            output.textContent += message + '\n';
+        }
+    </script>
+
+    <div class="section">
+        <h2>📌 まとめ</h2>
+        <ul>
+            <li>除算は常に小数を返す（C言語の整数除算とは異なる）</li>
+            <li><code>===</code>と<code>!==</code>を使う（型変換なしの厳密比較）</li>
+            <li>制御構文（if, switch, for, while）はC言語とほぼ同じ</li>
+            <li>switch文で文字列も使える</li>
+            <li><code>**</code>演算子でべき乗計算ができる</li>
+        </ul>
+        <p><strong>次のレッスン：</strong> 03-functions.html（関数 - C言語との大きな違い）</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07: 総合演習 - JavaScript学習</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2c3e50; }
+        h2 { color: #3498db; }
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .exercise {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover { background: #2980b9; }
+        button.delete { background: #e74c3c; }
+        button.delete:hover { background: #c0392b; }
+        .demo-box {
+            border: 2px solid #3498db;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #ecf0f1;
+        }
+        input, select {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .highlight {
+            background: #e8f5e9;
+            padding: 10px;
+            border-left: 4px solid #4caf50;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>📚 Lesson 07: 総合演習</h1>
+
+    <div class="section">
+        <h2>🎯 これまでの学習内容</h2>
+        <ul>
+            <li>✅ 変数と型（let, const, データ型）</li>
+            <li>✅ 演算子と制御構文（if, for, while）</li>
+            <li>✅ 関数（関数宣言、アロー関数、高階関数）</li>
+            <li>✅ 配列とオブジェクト（map, filter, reduce）</li>
+            <li>✅ DOM操作（要素の取得、変更、追加）</li>
+            <li>✅ イベント処理（click, input, keydown）</li>
+        </ul>
+        
+        <div class="highlight">
+            <strong>💡 総合演習では、これらすべてを組み合わせた実践的なアプリケーションを作成します。</strong>
+        </div>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 プロジェクト1: ToDoリスト</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>タスクを入力して追加できる</li>
+            <li>各タスクに「完了」ボタンと「削除」ボタンを付ける</li>
+            <li>「完了」をクリックすると、タスクに取り消し線が引かれる</li>
+            <li>「削除」をクリックすると、タスクが削除される</li>
+            <li>タスクの総数と完了数を表示</li>
+            <li>「すべて削除」ボタンですべてのタスクを削除</li>
+        </ol>
+        
+        <div class="demo-box">
+            <h3>ToDoリスト</h3>
+            <div>
+                <input type="text" id="todo-input" placeholder="新しいタスクを入力">
+                <button id="todo-add">追加</button>
+                <button id="todo-clear" class="delete">すべて削除</button>
+            </div>
+            <p id="todo-stats">総数: 0 | 完了: 0</p>
+            <ul id="todo-list" style="list-style: none; padding: 0;"></ul>
+        </div>
+        
+        <details>
+            <summary>ヒント</summary>
+            <pre>// タスクオブジェクトの例
+{
+    id: 1,
+    text: "買い物に行く",
+    completed: false
+}
+
+// 配列でタスクを管理
+let tasks = [];
+
+// 完了状態の切り替え
+task.completed = !task.completed;
+
+// 取り消し線のスタイル
+element.style.textDecoration = "line-through";</pre>
+        </details>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 プロジェクト2: 簡易計算機</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>2つの数値を入力できる</li>
+            <li>演算子を選択できる（+, -, *, /）</li>
+            <li>「計算」ボタンで結果を表示</li>
+            <li>計算履歴を表示（最新5件）</li>
+            <li>「履歴をクリア」ボタンで履歴を削除</li>
+            <li>エラー処理（数値以外の入力、0での除算）</li>
+        </ol>
+        
+        <div class="demo-box">
+            <h3>簡易計算機</h3>
+            <div>
+                <input type="number" id="calc-num1" placeholder="数値1">
+                <select id="calc-operator">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">×</option>
+                    <option value="/">÷</option>
+                </select>
+                <input type="number" id="calc-num2" placeholder="数値2">
+                <button id="calc-execute">計算</button>
+            </div>
+            <p id="calc-result" style="font-size: 24px; font-weight: bold;"></p>
+            <div>
+                <h4>計算履歴</h4>
+                <button id="calc-clear-history" class="delete">履歴をクリア</button>
+                <ul id="calc-history" style="list-style: none; padding: 0;"></ul>
+            </div>
+        </div>
+        
+        <details>
+            <summary>ヒント</summary>
+            <pre>// 演算の実行
+function calculate(num1, num2, operator) {
+    switch(operator) {
+        case '+': return num1 + num2;
+        case '-': return num1 - num2;
+        case '*': return num1 * num2;
+        case '/': 
+            if (num2 === 0) return "エラー: 0で割れません";
+            return num1 / num2;
+    }
+}
+
+// 履歴の管理（配列）
+let history = [];
+history.unshift(newItem); // 先頭に追加
+if (history.length > 5) history.pop(); // 5件まで</pre>
+        </details>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 プロジェクト3: 学生成績管理システム</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>学生の名前と点数を入力して追加</li>
+            <li>学生リストを表形式で表示（名前、点数、評価）</li>
+            <li>評価は自動計算（90以上:S, 80以上:A, 70以上:B, 60以上:C, 60未満:D）</li>
+            <li>平均点を表示</li>
+            <li>点数でソート（昇順/降順）</li>
+            <li>各学生に削除ボタンを付ける</li>
+            <li>60点未満の学生を赤色で表示</li>
+        </ol>
+        
+        <div class="demo-box">
+            <h3>学生成績管理</h3>
+            <div>
+                <input type="text" id="student-name" placeholder="学生名">
+                <input type="number" id="student-score" placeholder="点数" min="0" max="100">
+                <button id="student-add">追加</button>
+            </div>
+            <div style="margin: 10px 0;">
+                <button id="student-sort-asc">点数で昇順</button>
+                <button id="student-sort-desc">点数で降順</button>
+            </div>
+            <p id="student-average"></p>
+            <table id="student-table">
+                <thead>
+                    <tr>
+                        <th>名前</th>
+                        <th>点数</th>
+                        <th>評価</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="student-tbody"></tbody>
+            </table>
+        </div>
+        
+        <details>
+            <summary>ヒント</summary>
+            <pre>// 学生オブジェクトの例
+{
+    id: 1,
+    name: "太郎",
+    score: 85
+}
+
+// 評価の計算
+function getGrade(score) {
+    if (score >= 90) return 'S';
+    if (score >= 80) return 'A';
+    if (score >= 70) return 'B';
+    if (score >= 60) return 'C';
+    return 'D';
+}
+
+// ソート
+students.sort((a, b) => a.score - b.score); // 昇順
+students.sort((a, b) => b.score - a.score); // 降順
+
+// 平均点
+const average = students.reduce((sum, s) => sum + s.score, 0) / students.length;</pre>
+        </details>
+    </div>
+
+    <div class="section exercise">
+        <h2>💪 チャレンジ: タイマーアプリ</h2>
+        <p><strong>要件：</strong></p>
+        <ol>
+            <li>秒数を入力してカウントダウン</li>
+            <li>「開始」「一時停止」「リセット」ボタン</li>
+            <li>残り時間を表示（MM:SS形式）</li>
+            <li>0になったら「時間です！」と表示</li>
+            <li>カウントダウン中は背景色を変更</li>
+        </ol>
+        
+        <div class="demo-box">
+            <h3>タイマー</h3>
+            <div>
+                <input type="number" id="timer-seconds" placeholder="秒数" min="1" value="10">
+                <button id="timer-start">開始</button>
+                <button id="timer-pause">一時停止</button>
+                <button id="timer-reset">リセット</button>
+            </div>
+            <p id="timer-display" style="font-size: 48px; font-weight: bold; text-align: center;">00:00</p>
+            <p id="timer-message" style="text-align: center; font-size: 24px;"></p>
+        </div>
+        
+        <details>
+            <summary>ヒント</summary>
+            <pre>// setIntervalでカウントダウン
+let intervalId;
+let remainingSeconds = 60;
+
+function startTimer() {
+    intervalId = setInterval(() => {
+        remainingSeconds--;
+        updateDisplay();
+        
+        if (remainingSeconds <= 0) {
+            clearInterval(intervalId);
+            // 終了処理
+        }
+    }, 1000);
+}
+
+// 時間のフォーマット
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}</pre>
+        </details>
+    </div>
+
+    <script>
+        // ↓↓↓ ここにプロジェクトのコードを書く ↓↓↓
+        
+        // プロジェクト1: ToDoリスト
+        
+        
+        
+        // プロジェクト2: 簡易計算機
+        
+        
+        
+        // プロジェクト3: 学生成績管理システム
+        
+        
+        
+        // チャレンジ: タイマーアプリ
+        
+        
+        
+        // ↑↑↑ ここまで ↑↑↑
+    </script>
+
+    <div class="section">
+        <h2>🎓 学習完了！</h2>
+        <p>お疲れ様でした！これでJavaScriptの基礎を一通り学習しました。</p>
+        
+        <h3>次のステップ</h3>
+        <ul>
+            <li><strong>非同期処理：</strong> Promise, async/await</li>
+            <li><strong>モダンJavaScript：</strong> ES6+の機能（分割代入、スプレッド構文など）</li>
+            <li><strong>API連携：</strong> fetch, REST API</li>
+            <li><strong>フレームワーク：</strong> React, Vue.js, Angular</li>
+            <li><strong>Node.js：</strong> サーバーサイドJavaScript</li>
+        </ul>
+
+        <h3>復習のポイント</h3>
+        <ul>
+            <li>各レッスンの課題を繰り返し解く</li>
+            <li>自分でアイデアを考えて小さなアプリを作る</li>
+            <li>エラーメッセージを読んで理解する習慣をつける</li>
+            <li>MDN Web Docs（Mozilla Developer Network）で詳しく調べる</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>💡 C言語の経験を活かして：</strong><br>
+            アルゴリズムやデータ構造の知識は、JavaScriptでも同じように活用できます。
+            C言語で学んだ論理的思考力を、より柔軟なJavaScriptの世界で発揮してください！
+        </div>
+    </div>
+</body>
+</html>
