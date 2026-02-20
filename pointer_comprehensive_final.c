@@ -76,6 +76,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include<unistd.h>
 
 // ここに構造体 Book を定義してください
 struct Book{
@@ -99,17 +100,51 @@ void displayBooks(struct Book *books, int count){
    if(count == 0){
       printf("登録されている本はありません\n");
    }
-
-
+   else{
+   printf("=== 蔵書一覧 ===\n");
    printf("%d冊の本が見つかりました\n",count);
    for(int i = 0; i < count; i++){
       printf("=== 本 %d ===\n",i + 1);
       printf("タイトル: %s\n",books[i].title);
-
+      printf("著者名: %s\n",books[i].author);
+      printf("出版年: %d\n",books[i].year);
+      printf("価格: %.2f\n",books[i].price);
+      printf("在庫: %d\n",books[i].available);
+      printf("\n");
+      }
    }
+   return;
 }
 
+void borrowBook(struct Book *books, int count, int index){
+   if(books[index].available == 0)
+      printf("在庫がありません\n");
+   else{
+      books[index - 1].available -= 1;
+      printf("貸出しました\n");
+      printf("期限は2週間です\n");
+   }
+   printf("\n");
+   
+   return;
+}
 
+void returnBook(struct Book *books, int count, int index){
+   books[index].available += 1;
+   
+   int sleep = 25000;
+   printf("0%% ");
+   usleep(1000000);
+   for(int i = 0; i < 20; i++){
+   printf("#");
+   usleep(sleep);
+   }
+   printf(" 100%%\n");
+   printf("- 返却完了 -\n");
+   printf("\n");
+
+   return;
+}
 
 int main() {
     // ここにコードを書いてください
@@ -117,6 +152,7 @@ int main() {
     struct Book newBook;
     int bookCount = 0;
     int Unum = 0;
+    int index;
 
     printf("=== 図書館管理システム ===\n");
 
@@ -154,14 +190,26 @@ int main() {
                 break;
                 
                 case 3:
+                printf("=== 本の貸し出し ===\n");
+                for(int i = 0; i < bookCount; i++)
+                  printf("%d. %s\n",i + 1,books[i].title);
+                printf("\n");
+                printf("借りたい本の番号を入力してください: ");
+                scanf("%d",&index);
+                if(index < 0 || index > bookCount){
+                  printf("その番号の本はありません\n");
+                  break;
+                }
+                else
+                   borrowBook(books,bookCount,index);
                 break;
 
                 case 4:
+                returnBook(books, bookCount, index);
                 break;
 
                 case 5:
                     return 0;
-
             }
     }
     
