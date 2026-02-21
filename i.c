@@ -1,28 +1,34 @@
 #include <stdio.h>
+#include<string.h>
+
+// 区切り線を出力
+void print_separator(int width, char ch) {
+    for(int i = 0; i < width; i++) {
+        printf("%c", ch);
+    }
+    printf("\n");
+}
+
+// 中央揃えで出力
+void print_centered(const char* text, int width) {
+    int len = strlen(text);
+    int padding = (width - len) / 2;
+    printf("%*s%s%*s\n", padding, "", text, padding, "");
+}
+
+// 表のヘッダー
+void print_table_header(const char* col1, const char* col2, const char* col3) {
+    print_separator(40, '=');
+    printf("| %-10s | %-10s | %-10s |\n", col1, col2, col3);
+    print_separator(40, '=');
+}
 
 int main() {
-    // 表の作成
-    printf("┌──────────┬─────┬──────────┐\n");
-    printf("│ 商品名   │ 数量│   価格   │\n");
-    printf("├──────────┼─────┼──────────┤\n");
-    printf("│ %-8s │ %3d │ %8.2f │\n", "りんご", 10, 1500.50);
-    printf("│ %-8s │ %3d │ %8.2f │\n", "みかん", 5, 2999.99);
-    printf("│ %-8s │ %3d │ %8.2f │\n", "バナナ", 20, 500.00);
-    printf("└──────────┴─────┴──────────┘\n");
-    
-    // 進捗バー
-    int progress = 75;
-    printf("進捗: [");
-    for(int i = 0; i < 50; i++) {
-        if(i < progress / 2) printf("=");
-        else printf(" ");
-    }
-    printf("] %3d%%\n", progress);
-    
-    // デバッグ情報
-    int *ptr = &progress;
-    printf("変数のアドレス: %p\n", (void*)ptr);
-    printf("変数の値: %d (0x%X)\n", *ptr, *ptr);
+    print_centered("タイトル", 40);
+    print_table_header("名前", "年齢", "点数");
+    printf("| %-10s | %10d | %10d |\n", "Taro", 25, 85);
+    printf("| %-10s | %10d | %10d |\n", "Hanako", 23, 92);
+    print_separator(40, '=');
     
     return 0;
 }

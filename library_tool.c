@@ -33,10 +33,11 @@ int main(void){
         printf("5.終了\n");
         do{
         printf("input number: ");
-        scanf("%d",&Unum);
+        result = scanf("%d",&Unum);
+        while(getchar() != '\n');
+        }while(result != 1)
         printf("\n");
-        }while(!isdigit(Unum))
-
+        
         switch(Unum){
             case 1:{
                 addBook(books, &bookCount);
