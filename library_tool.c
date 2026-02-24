@@ -31,11 +31,17 @@ int main(void){
         printf("3.本の貸し出し\n");
         printf("4.本の返却\n");
         printf("5.終了\n");
-        do{
+
+        do {
         printf("input number: ");
         result = scanf("%d",&Unum);
         while(getchar() != '\n');
-        }while(result != 1)
+
+        if(result != 1){
+            printf("数値を入力してください\n");
+        }
+        }while(result != 1);
+
         printf("\n");
         
         switch(Unum){
@@ -91,7 +97,7 @@ void addBook(struct Book *books, int *count){
 }
 
 void displayBook(struct Book *book, int count){
-    printf("=== 本の一覧表示 ===\n");
+    printf("=== 本の一覧表示 ===\n\n");
 
     if(count <= 0){
         printf("表示できる本はありません\n");

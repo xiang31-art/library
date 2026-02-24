@@ -297,7 +297,20 @@ for (let i = 0; i < 10; i++) {
             output.textContent = '';
             
             // ↓↓↓ ここから課題1のコードを書く ↓↓↓
-            
+            for(let count = 1; count <= 30; count++){
+                if (count % 15 === 0){
+                    print('output1', "FizzBuzz");
+                }
+                else if (count % 3 === 0){
+                    print('output1', "Fizz");
+                }
+                else if (count % 5 === 0){
+                    print('output1', "Buzz");
+                }
+                else{
+                    print('output1', count);
+                }
+            }
             
             
             // ↑↑↑ ここまで ↑↑↑
@@ -308,9 +321,57 @@ for (let i = 0; i < 10; i++) {
             output.textContent = '';
             
             // ↓↓↓ ここから課題2のコードを書く ↓↓↓
+            let score = 89;
+            let grade = "評価なし";
+            if (score >= 90 && score <= 100){
+                grade = "S";
+            }
+            else if (score >= 80){
+                grade = "A";
+            }
+            else if (score >= 70){
+                grade = "B";
+            }
+            else if (score >= 60){
+                grade = "C";
+            }
+            else if (score >=0){
+                grade = "D";
+            }
+            print("output2", `点数: ${score}, 評価: ${grade}`);
+
+            print("output2", "switch ver");
+
+            let judgeNum = 0;
+            judgeNum = Math.floor(score / 10);
+            switch(judgeNum){
+                case 10:
+                case 9:
+                    grade = "S";
+                    break;
+                case 8:
+                    grade = "A";
+                    break;
+                case 7:
+                    grade = "B";
+                    break;
+                case 6:
+                    grade = "C";
+                    break;
+                case 5:
+                case 4:
+                case 3:
+                case 2:
+                case 1:
+                case 0:
+                    grade = "D";
+                    break;
+                default:
+                    grade = "評価なし";
+                    break;
+            }
             
-            
-            
+            print("output2", `点数: ${score}, 評価: ${grade}`);
             // ↑↑↑ ここまで ↑↑↑
         }
 

@@ -221,9 +221,15 @@ let str2 = num.toString();   // "456"</pre>
             output.textContent = '課題1のコードをここに書いてください\n';
             
             // ↓↓↓ ここから課題1のコードを書く ↓↓↓
-            
-            
-            
+            const name = "xiang";
+            let age = 16;
+            let isStudent = true;
+            print('output1', '名前:' + name);
+            print('output1', '年齢:' + age);
+            print('output1', '学生:' + isStudent);
+
+            age++;
+            print('output1', '1年後の年齢:' + age);
             // ↑↑↑ ここまで ↑↑↑
         }
 
@@ -232,9 +238,18 @@ let str2 = num.toString();   // "456"</pre>
             output.textContent = '課題2のコードをここに書いてください\n';
             
             // ↓↓↓ ここから課題2のコードを書く ↓↓↓
+            let str4 = "100";
+            let str5 = "50";
+            console.log(typeof str4);
+
+            let num4 = Number(str4);
+            let num5 = Number(str5);
+            console.log(typeof num4);
             
+            let sum = num4 + num5;
             
-            
+            let result = "合計:" + String(sum);
+            print('output2', result);
             // ↑↑↑ ここまで ↑↑↑
         }
 
@@ -243,8 +258,13 @@ let str2 = num.toString();   // "456"</pre>
             output.textContent = '課題3のコードをここに書いてください\n';
             
             // ↓↓↓ ここから課題3のコードを書く ↓↓↓
-            
-            
+            let prodName = "apple";
+            let price = 150;
+            let available = 3;
+            let prodTotal = price * available;
+            let str6 = `商品名: ${prodName}, 価格: ${price}, 個数: ${available}, 合計: ${prodTotal}`;
+
+            print('output3', str6);
             
             // ↑↑↑ ここまで ↑↑↑
         }
